@@ -61,8 +61,7 @@
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a class="btn btn-link text-white" href="./../admin">
-                {% if user.is_authenticated %} {{ user.first_name }}{{
-                user.username }} {% else %} Login {% endif %}
+                {% if user.is_authenticated %} {{ user }} {% else %} Login {% endif %}
               </a>
             </li>
           </ul>
