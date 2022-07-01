@@ -41,8 +41,10 @@ def login_request(request):
         if user is not None:
             login(request, user)
             return redirect('./')
-    
-    return render(request, 'index.html')
+        else:
+            messages.warning(request, f"Login failed ! ")
+            return redirect('./')
+
 
 
 
@@ -67,12 +69,15 @@ def registration_request(request):
         try:
             User.objects.get(username=username)
             user_exist = True
+            messages.warning(request, f"Username {username} is already exists! ")
+
         except:
             logger.debug("{} is new user".format(username))
 
         if not user_exist:
             user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
             login(request, user)
+            messages.warning(request, f"Welcome {username}! ")
             return redirect('./')
 
     return render(request, 'djangoapp/registration.html',{})

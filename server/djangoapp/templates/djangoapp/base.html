@@ -58,28 +58,64 @@
               <a class="nav-link" href="./contact">Contact Us</a>
             </li>
           </ul>
-          {% if user.is_authenticated %} 
+          {% if user.is_authenticated %}
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a class="btn btn-link text-white text-capitalize" href="./../admin">{{ user }}</a>
-              <a class="btn btn-link text-white " href="./logout">Logout</a>
+              <a
+                class="btn btn-link text-white text-capitalize"
+                href="JavaScript:void(0)"
+                >{{ user }}</a
+              >
+              <a class="btn btn-link text-white" href="./logout">Logout</a>
             </li>
           </ul>
           {% else %}
           <form class="form-inline my-2 my-lg-0" method="post" action="login">
             {% csrf_token %}
-            <input class="form-control mr-sm-2" id="username" name="username" type="text" placeholder="User name" Required>
-            <input class="form-control mr-sm-2" id="password" name="password" type="Password" placeholder="Password"  Required>
-            <button class="btn btn-danger my-2 mr-sm-2 my-sm-0" type="submit">Login</button>
-            <a href="./registration" class="btn btn-secondary my-2 my-sm-0">Signup</a>
+            <input
+              class="form-control mr-sm-2"
+              id="username"
+              name="username"
+              type="text"
+              placeholder="User name"
+              required
+            />
+            <input
+              class="form-control mr-sm-2"
+              id="password"
+              name="password"
+              type="Password"
+              placeholder="Password"
+              required
+            />
+            <button class="btn btn-danger my-2 mr-sm-2 my-sm-0" type="submit">
+              Login
+            </button>
+            <a href="./registration" class="btn btn-secondary my-2 my-sm-0"
+              >Signup</a
+            >
           </form>
           {% endif %}
-
         </div>
       </div>
     </nav>
 
-    {% block body %}{% endblock body %}
+    {% if messages %} {% for message in messages %}
+    <div
+      class="alert alert-{{ message.tags }} alert-dismissible fade show my-0"
+      role="alert"
+    >
+      <strong>{{ message }}</strong>
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endfor %} {% endif %} {% block body %}{% endblock body %}
     <footer class="footer">
       <div class="container text-center">
         <a class="text-muted btn btn-sm btn-link" href="./"
