@@ -1,11 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    {% load static %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-    <body>
-    <!--Add a registration form here -->
-    </body>
-</html>
+{% extends './base.html' %} {% block body %}
+
+<div class="row mb-5 mt-5">
+  <div class="col-md-4 offset-md-4 text-center">
+    <img
+      src="https://yt3.ggpht.com/ytc/AKedOLTxzSOLIe9OTTaJrIb4nnZ4eB_2lpv7LUrzjyvj=s176-c-k-c0x00ffffff-no-rj-mo"
+      alt=""
+    />
+    <form class="form-signup" method="post" action="registration">
+      {% csrf_token %}
+      <h1 class="h3 mb-3 font-weight-normal">User <b>Registration</b></h1>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            class="form-control mb-3"
+            placeholder="Enter first name"
+            required
+            autofocus
+          />
+        </div>
+        <div class="col-md-6">
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            class="form-control mb-3"
+            placeholder="Enter last name"
+            required
+            autofocus
+          />
+        </div>
+        <div class="col-md-6">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="form-control mb-3"
+              placeholder="Enter User name"
+              required
+              autofocus
+            />
+          </div>
+          <div class="col-md-6">
+          <input
+            type="password"
+            id="inputPassword"
+            name="password"
+            class="form-control mb-3"
+            placeholder="Password"
+            required
+          />
+        </div>
+      </div>
+      <button class="btn btn-danger btn-block" type="submit">
+        Sign up
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock body %}

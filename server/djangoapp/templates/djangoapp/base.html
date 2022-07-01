@@ -58,13 +58,23 @@
               <a class="nav-link" href="./contact">Contact Us</a>
             </li>
           </ul>
+          {% if user.is_authenticated %} 
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <a class="btn btn-link text-white" href="./../admin">
-                {% if user.is_authenticated %} {{ user }} {% else %} Login {% endif %}
-              </a>
+              <a class="btn btn-link text-white text-capitalize" href="./../admin">{{ user }}</a>
+              <a class="btn btn-link text-white " href="./logout">Logout</a>
             </li>
           </ul>
+          {% else %}
+          <form class="form-inline my-2 my-lg-0" method="post" action="login">
+            {% csrf_token %}
+            <input class="form-control mr-sm-2" id="username" name="username" type="text" placeholder="User name" Required>
+            <input class="form-control mr-sm-2" id="password" name="password" type="Password" placeholder="Password"  Required>
+            <button class="btn btn-danger my-2 mr-sm-2 my-sm-0" type="submit">Login</button>
+            <a href="./registration" class="btn btn-secondary my-2 my-sm-0">Signup</a>
+          </form>
+          {% endif %}
+
         </div>
       </div>
     </nav>
