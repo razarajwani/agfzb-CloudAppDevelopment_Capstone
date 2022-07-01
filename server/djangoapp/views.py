@@ -40,10 +40,11 @@ def login_request(request):
 
         if user is not None:
             login(request, user)
-            return redirect('./')
+            messages.success(request, f"Welcome {user.first_name} to BestCars! ")
+            return redirect('djangoapp:index')
         else:
-            messages.warning(request, f"Login failed ! ")
-            return redirect('./')
+            messages.warning(request, f"Login failed! Please ensure the username and password are valid. ")
+            return redirect('djangoapp:index')
 
 
 
@@ -51,7 +52,7 @@ def login_request(request):
 # Create a `logout_request` view to handle sign out request
 def logout_request(request):
     logout(request)
-    return redirect('./')
+    return redirect('djangoapp:index')
 
 # Create a `registration_request` view to handle sign up request
 def registration_request(request):
@@ -77,8 +78,8 @@ def registration_request(request):
         if not user_exist:
             user = User.objects.create_user(username=username, password=password, first_name=firstname, last_name=lastname)
             login(request, user)
-            messages.warning(request, f"Welcome {username}! ")
-            return redirect('./')
+            messages.success(request, f"Welcome {user.first_name} to BestCars! ")
+            return redirect('djangoapp:index')
 
     return render(request, 'djangoapp/registration.html',{})
 
