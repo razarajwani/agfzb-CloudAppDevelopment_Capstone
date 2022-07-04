@@ -84,4 +84,4 @@ class DealerReview:
 
 
     def __str__(self):
-        return "Dealer name: " + str(self.name)
+        return "Dealer name: " + self.full_name

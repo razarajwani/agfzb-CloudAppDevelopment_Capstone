@@ -1,18 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Dealership Review</title>
-    {% load static %}
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
+{% extends './base.html' %} 
+{% block title %}Home{% endblock title %}
 
-    <body>
+{% block extraNav %}
+    {% if user.is_authenticated  %}
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'djangoapp:add_review' dealer %}">Add review</a>
+    </li>
+    {% endif %}
+{% endblock extraNav %}
 
-    <!--Add a nav bar here -->
 
-    <!-- Add reviews as cards -->
 
-    </body>
+ {% block body %}
+<!-- Add reviews as cards -->
+<div class="container mx-auto my-5 ">
 
-</html>
+    <h1>Reviews for dealer #{{ dealer  }} - {{dealer.full_name}}</h1>
+    <div class="card-columns">
+        {% for review in dealer_reviews %}
+        <div class="card">
+            <img class="card-img-left m-2" width="30" height="30" src="{{MEDIA_URL}}/emoji/{{ review.sentiment }}.png">
+
+            <div class="card-body">
+                <h3 class="card-title">
+                    {{ review.car_model }}, {{ review.car_make }}
+                </h3>
+                <h3 class="card-title">
+                    {{ review.car_year }}
+                </h3>
+                <div class="card-text">
+                    {{ review.review }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+{% endblock body %} 
+
+{% block scripts %}{% endblock scripts %}
