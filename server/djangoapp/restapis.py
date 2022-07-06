@@ -89,7 +89,7 @@ def get_dealer_reviews_from_cf(url, dealer_id):
                 id="",
                 name="",
                 dealership=dealer_doc['dealership'],
-                purchase=dealer_doc['purchase'],
+                purchase=dealer_doc['purchase'] ,
                 purchase_date=dealer_doc['purchase_date'] if dealer_doc['purchase'] else "",
                 review=dealer_doc['review'],
                 car_make=dealer_doc['car_make'] if dealer_doc['purchase'] else "None",

@@ -13,9 +13,13 @@
 
  {% block body %}
 <!-- Add reviews as cards -->
-<div class="container mx-auto my-5 ">
+<div class="container mx-auto my-2 ">
 
-    <h1>Reviews for dealer #{{ dealer  }} - {{dealer.full_name}}</h1>
+    <h1 class="my-3"><small>Reviews for dealer #{{ dealer  }}<br></small> 
+        {% for dealer in dealerships %}
+            {{dealer.full_name}}
+        {% endfor %}
+    </h1>
     <div class="card-columns">
         {% for review in dealer_reviews %}
         <div class="card">

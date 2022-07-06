@@ -67,11 +67,11 @@
                 href="JavaScript:void(0)"
                 >{{ user }}</a
               >
-              <a class="btn btn-link text-white" href="./logout">Logout</a>
+              <a class="btn btn-link text-white" href="{% url 'djangoapp:logout' %}">Logout</a>
             </li>
           </ul>
           {% else %}
-          <form class="form-inline my-2 my-lg-0" method="post" action="login">
+          <form class="form-inline my-2 my-lg-0" method="post" action="{% url 'djangoapp:login' %}">
             {% csrf_token %}
             <input
               class="form-control mr-sm-2"

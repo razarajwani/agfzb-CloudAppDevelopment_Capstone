@@ -8,36 +8,48 @@
     {% csrf_token %}
 
     <div class="container my-3">
-        <h1>Add review</h1>
+        <h1>Add review {{dealer_id}}</h1>
         <hr>
-        <div>
-            <label for="review"><b>Enter the review content:</b></label>
-            <textarea name="review" id="review" cols="30" rows="7" class="form-control" required></textarea>
+        <div class="row">
+        <div class="my-3 col-12 ">
+            <label for="name" class="font-weight-bold">Name:</label><input
+                class="form-control" type="text" name="name" id="name" value="{{user}}">
         </div>
 
-        <div class="ml-4 my-2">
-            <input class="form-check-input" type="checkbox" name="purchase" id="purchasecheck">
+        <div class=" col-12">
+            <label for="review"><b>Enter the review content:</b></label>
+            <textarea name="review" id="review" cols="30" rows="5" class="form-control" required></textarea>
+        </div>
 
+
+        <div class="ml-4 my-2  col-12 ">
+            <input class="form-check-input" type="checkbox" name="purchase" id="purchasecheck" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             <label for="purchasecheck"><b>Has purchased the car from {{dealer}} ? </b> (select purchased car information below if checked)</label>
         </div>
 
-        <div class="my-3">
+    </div>
+
+        <div class="collapse row full-width" id="collapseExample">
+        <div class="  col-6">
             <label for="car" class="font-weight-bold d-block">Select your car</label>
-            <select name="car" id="car" class="form-select">
+            <select name="car" id="car" class="form-select form-control">
                 {% for car in cars %}
                 <option selected value={{car.id}}>{{car.name}}-{{car.make.name}}-{{ car.year|date:"Y" }}</option>
                 {% endfor %}
             </select>
         </div>
 
-        <div class="my-3">
+        <div class=" col-6">
             <label for="purchasedate" class="font-weight-bold">Select Your Purchase date</label><input
                 class="date-own form-control" type="text" name="purchasedate" id="purchasedate">
         </div>
+    </div>
         <div>
             <button class="btn btn-info my-2" type="submit">Submit</button>
         </div>
     </div>
+</div>
+    
 </form>
 
 {% endblock body %} 
@@ -55,4 +67,8 @@
         });
     })
 </script>
+<style>
+    .full-width{width:100%;}
+</style>
+
 {% endblock scripts %}

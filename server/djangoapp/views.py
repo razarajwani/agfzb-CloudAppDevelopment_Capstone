@@ -101,6 +101,10 @@ def get_dealer_details(request, dealer_id):
         context = {}
         url = "https://eb64b315.us-south.apigw.appdomain.cloud/api/review"
         context['dealer_reviews'] = get_dealer_reviews_from_cf(url, dealer_id)
+
+        url = f"https://eb64b315.us-south.apigw.appdomain.cloud/api/dealership?id={dealer_id}"
+        context['dealerships'] = get_dealers_from_cf(url)
+
         context['dealer'] = dealer_id
 
         # Return a list of dealer short name
@@ -115,11 +119,13 @@ def add_review(request, dealer_id):
         context['cars'] = CarModel.objects.filter(dealership=dealer_id)
 
         return render(request, 'djangoapp/add_review.html', context)
+
     if request.method == "POST" and request.user.is_authenticated:
         url = "https://eb64b315.us-south.apigw.appdomain.cloud/api/review"
         review_payload = dict()
         review_payload["time"] = datetime.utcnow().isoformat()
         review_payload["dealership"] = dealer_id
+        review_payload["name"] = request.POST.get('name', "")
         review_payload["review"] = request.POST.get('review', "")
         review_payload["purchase"] = request.POST.get('purchase', False)
 
@@ -131,6 +137,10 @@ def add_review(request, dealer_id):
             review_payload["car_year"] = car.year.strftime("%Y")
             review_payload["car_make"] = car.maker.name
 
-        response = post_request(url, json_payload=dict(review=review_payload))
+
+        response = post_request(url, json_payload=dict(review_payload))
+        messages.success(request, 'Thank you for your review')
+        
 
         return redirect("djangoapp:dealer_details", dealer_id=dealer_id)
+    
