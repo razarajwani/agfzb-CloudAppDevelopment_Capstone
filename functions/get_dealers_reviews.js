@@ -10,19 +10,20 @@
  const DB_NAME='reviews';
  
  async function main(params) {
-     const authenticator = new IamAuthenticator({apikey: IAM_API_KEY});
+    try {
+
+    const authenticator = new IamAuthenticator({apikey: IAM_API_KEY});
      const cloudant = CloudantV1.newInstance({authenticator: authenticator});
      cloudant.setServiceUrl(COUCH_URL);
     
     var dealerId=parseInt(params.dealerId) ;
-    try {
+ 
  
          let dbList = await cloudant.postFind({
              db: DB_NAME,
              selector:{'dealership':dealerId}
          });
          return  dbList.result;
- 
  
      } catch (error) {
          return {

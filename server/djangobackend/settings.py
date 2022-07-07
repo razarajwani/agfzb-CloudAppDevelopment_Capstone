@@ -29,7 +29,7 @@ DEBUG = True
 APPEND_SLASH = True
 
 # Allowed Hosts
-ALLOWED_HOSTS = ["localhost","127.0.0.1","razarajwani.mybluemix.net"]
+ALLOWED_HOSTS = ["localhost","127.0.0.1","razarajwani.mybluemix.net","https://razarajwani-8000.theiadocker-1-labs-prod-theiak8s-4-tor01.proxy.cognitiveclass.ai/"]
 
 
 # Application definition

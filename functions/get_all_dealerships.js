@@ -10,17 +10,23 @@
  const DB_NAME='dealerships';
  
  async function main(params) {
+    
+     try {
+ 
      const authenticator = new IamAuthenticator({apikey: IAM_API_KEY});
      const cloudant = CloudantV1.newInstance({authenticator: authenticator});
      cloudant.setServiceUrl(COUCH_URL);
     
         var state=params.state ;
- 
-        try {
+        selector={'st':state}
+        
+        if (params.id!=null) {
+            selector['id']=parseInt(params.id);
+        }
  
          let dbList = await cloudant.postFind({
              db: DB_NAME,
-             selector:{'st':state}
+             selector:selector
          });
          return  dbList.result;
  

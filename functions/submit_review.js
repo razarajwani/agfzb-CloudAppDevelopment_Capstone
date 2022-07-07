@@ -1,5 +1,5 @@
 /**
- * Submit Reviews
+ * Get all dealerships (Optional Parameter State)
  */
 
  const {CloudantV1} = require('@ibm-cloud/cloudant');
@@ -10,13 +10,15 @@
  const DB_NAME='reviews';
  
  async function main(params) {
+     
+     try {
+ 
      const authenticator = new IamAuthenticator({apikey: IAM_API_KEY});
      const cloudant = CloudantV1.newInstance({authenticator: authenticator});
      cloudant.setServiceUrl(COUCH_URL);
     
-     try {
-  
-       let req = await cloudant.postDocument({
+ 
+         let req = await cloudant.postDocument({
              db: DB_NAME,
              document: params
          });
